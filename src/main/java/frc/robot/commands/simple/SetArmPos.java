@@ -2,8 +2,6 @@ package frc.robot.commands.simple;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.enums.ArmPostitions;
-import frc.robot.enums.ClimbPositions;
-import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Pivot;
 
 public class SetArmPos extends InstantCommand{
