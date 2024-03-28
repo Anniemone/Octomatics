@@ -16,7 +16,8 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
 
 public class SwerveModule {
-
+    // This is stolen from a template. I don't understand it because I didn't read
+    // it, but you should. Stealing code is always encouraged though.
     public final CANSparkMax driveMotor;
     public final CANSparkMax turningMotor;
 
@@ -37,8 +38,8 @@ public class SwerveModule {
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
-        //absoluteEncoder.setPositionToAbsolute();
-        //absoluteEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
+        // absoluteEncoder.setPositionToAbsolute();
+        // absoluteEncoder.configSensorInitializationStrategy(SensorInitializationStrategy.BootToAbsolutePosition);
 
         driveMotor.setIdleMode(IdleMode.kBrake);
         turningMotor.setIdleMode(IdleMode.kBrake);
@@ -59,7 +60,8 @@ public class SwerveModule {
 
         resetEncoders();
 
-      //  SmartDashboard.putString("Swerve[" + absoluteEncoder.getDeviceID() + "] state", toString());
+        // SmartDashboard.putString("Swerve[" + absoluteEncoder.getDeviceID() + "]
+        // state", toString());
     }
 
     public double getDrivePosition() {
@@ -88,7 +90,7 @@ public class SwerveModule {
         return offset - angle;
     }
 
-    public double getRawAbsoluteEncoder(){
+    public double getRawAbsoluteEncoder() {
         double absoluteAngle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * 360;
         return absoluteAngle;
     }
@@ -106,7 +108,7 @@ public class SwerveModule {
         return new SwerveDriveKinematics();
     }
 
-    public SwerveModulePosition getPosition(){
+    public SwerveModulePosition getPosition() {
         return new SwerveModulePosition();
     }
 

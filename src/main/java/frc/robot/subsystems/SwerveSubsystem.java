@@ -14,14 +14,18 @@ import frc.robot.Constants.DriveConstants;
 
 import com.kauailabs.navx.frc.AHRS;
 
+//This is stolen from a template. I don't understand it because I didn't read it, but you should. Stealing code is always encouraged though.
+//I also added a getInstance like the other subsystems.
 public class SwerveSubsystem extends SubsystemBase {
     private static SwerveSubsystem swerveSubsystem;
+
     public static SwerveSubsystem getInstance() {
         if (swerveSubsystem == null) {
             swerveSubsystem = new SwerveSubsystem();
         }
         return swerveSubsystem;
     }
+
     public static final SwerveModule frontLeft = new SwerveModule(
             DriveConstants.kFrontLeftDriveMotorPort,
             DriveConstants.kFrontLeftTurningMotorPort,
@@ -60,8 +64,10 @@ public class SwerveSubsystem extends SubsystemBase {
 
     private final AHRS Navx2 = new AHRS();
     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
-            new Rotation2d(0), new SwerveModulePosition[]{frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(),
-                backRight.getPosition()}, new Pose2d(5.0, 13.5, new Rotation2d()));
+            new Rotation2d(0),
+            new SwerveModulePosition[] { frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(),
+                    backRight.getPosition() },
+            new Pose2d(5.0, 13.5, new Rotation2d()));
 
     public SwerveSubsystem() {
         new Thread(() -> {
@@ -87,11 +93,10 @@ public class SwerveSubsystem extends SubsystemBase {
 
     public SwerveDriveKinematics kinemetics() {
         return new SwerveDriveKinematics(
-        new Translation2d(24 / 2, -24 / 2),
-        new Translation2d(24 / 2, 24 / 2),
-        new Translation2d(-24 / 2, -24 / 2),
-        new Translation2d(-24 / 2, 24 / 2)
-        );
+                new Translation2d(24 / 2, -24 / 2),
+                new Translation2d(24 / 2, 24 / 2),
+                new Translation2d(-24 / 2, -24 / 2),
+                new Translation2d(-24 / 2, 24 / 2));
     }
 
     public Pose2d getPose() {
@@ -99,14 +104,17 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public void resetOdometry(Pose2d pose) {
-        odometer.resetPosition(getRotation2d(), new SwerveModulePosition[]{frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(),
-            backRight.getPosition()}, pose);
+        odometer.resetPosition(getRotation2d(),
+                new SwerveModulePosition[] { frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(),
+                        backRight.getPosition() },
+                pose);
     }
 
     @Override
     public void periodic() {
-        odometer.update(getRotation2d(), new SwerveModulePosition[]{frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(),
-                backRight.getPosition()});
+        odometer.update(getRotation2d(),
+                new SwerveModulePosition[] { frontLeft.getPosition(), frontRight.getPosition(), backLeft.getPosition(),
+                        backRight.getPosition() });
         SmartDashboard.putNumber("Robot Heading", getHeading());
         SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
 

@@ -12,9 +12,10 @@ import frc.robot.enums.ShooterSpeeds;
 import frc.robot.subsystems.Pivot;
 import frc.robot.subsystems.Shooter;
 
-public class Collect extends Command{
+public class Collect extends Command {
     Shooter shooter;
     Pivot pivot;
+
     public Collect() {
         this.pivot = Pivot.getInstance();
         this.shooter = Shooter.getInstance();
@@ -30,7 +31,14 @@ public class Collect extends Command{
     @Override
     public void end(boolean interrupted) {
         Pivot.getInstance().setPosition(ArmPostitions.FRAME.arm);
-        CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new SetKicker(ShooterSpeeds.BACKUP), new WaitCommand(0.05), new SetKicker(ShooterSpeeds.STOP), new SetFlywheels(ShooterSpeeds.STOP), new SetArmPos(ArmPostitions.FRAME)));
+        CommandScheduler.getInstance()
+                .schedule(
+                        new SequentialCommandGroup(
+                                new SetKicker(ShooterSpeeds.BACKUP),
+                                new WaitCommand(0.05),
+                                new SetKicker(ShooterSpeeds.STOP),
+                                new SetFlywheels(ShooterSpeeds.STOP),
+                                new SetArmPos(ArmPostitions.FRAME)));
     }
-    
+
 }
